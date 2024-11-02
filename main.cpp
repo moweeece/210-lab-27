@@ -13,6 +13,7 @@ int main() {
     // declarations
     map<string, villagerInfo> villagerData;
     int userChoice;
+    string villagerName;
 
     // displays menu and returns user choice
     do
@@ -26,35 +27,82 @@ int main() {
         cout << "6. Exit" << endl;
         cout << "User Selection: ";
         cin >> userChoice;
+        cin.ignore();
 
         cout << endl;
 
         // data validation for negative, 0, or greater than 6
-        if (userChoice <= 0 && userChoice > 6)
+        if (userChoice <= 0 || userChoice > 6)
         {
             cout << "Invalid Input" << endl;
+            continue;
         }
 
         switch(userChoice)
         {
             case 1:
-            // add villager
-            int friendshipLevel;
-            string species;
-            string catchphrase;
-            cout << "Villager name: ";
-            getline (cin, name);
+                // add villager
+                int friendshipLevel;
+                string species;
+                string catchphrase;
+                cout << "Villager name: ";
+                getline(cin, villagerName);
+                cin.ignore();
+                cout << endl;
+
+                cout << "Friendship Level: ";
+                cin >> friendshipLevel;
+                cin.ignore();
+                cout << endl;
+
+                cout << "Species: ";
+                getline(cin, species);
+                cin.ignore();
+                cout << endl;
+
+                cout << "Catchphrase: ";
+                getline(cin, catchphrase);
+                cin.ignore();
+                cout << endl;
+
+                // create a tuple with the user's inputted information
+                villagerData[villagerName] = make_tuple(friendshipLevel, species, catchphrase);
+
+                cout << villagerName << " added." << endl;
+
+                break;
 
             case 2:
-            // delete villager
+                // delete villager
+                cout << "Which villager would you like to delete?: ";
+                getline(cin, villagerName);
+                cin.ignore();
+                cout << endl;
+
+                if(villagerData.erase(villagerName))
+                {
+                    cout << villagerName << " deleted." << endl;
+                }
+
+
+
+                break;
             case 3:
-            // increase friendship
+                // increase friendship
+
+                break;
             case 4:
-            // decrease friendship
+                // decrease friendship
+
+                break;
             case 5:
-            // search for villager
+                // search for villager
+
+                break;
             case 6:
-            // exit
+                // exit
+
+                break;
             default:
                 break;
         }
