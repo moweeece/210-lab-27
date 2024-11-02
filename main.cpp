@@ -4,11 +4,36 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <tuple>
 using namespace std;
+
+using VillagerData = tuple<int, string, string>;
 
 int main() {
     // declarations
     map<string, vector<string>> villagerColors;
+    int userChoice;
+
+    // displays menu and returns user choice
+    do
+    {
+        cout << "1. Add Villager" << endl;
+        cout << "2. Delete Villager" << endl;
+        cout << "3. Increase Friendship" << endl;
+        cout << "4. Decrease Friendship" << endl;
+        cout << "5. Search for Villager" << endl;
+        cout << "6. Exit" << endl;
+        cout << "User Selection: ";
+        cin >> userChoice;
+
+        cout << endl;
+
+        if (userChoice <= 0 && userChoice > 6)
+        {
+            cout << "Invalid Input" << endl;
+        }
+
+    } while (userChoice <= 0 && userChoice > 6);
 
     // insert elements into the map
     // note how the right-hand side of the assignment are the vector elements
