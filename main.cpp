@@ -27,22 +27,18 @@ int main() {
         cout << "6. Exit" << endl;
         cout << "User Selection: ";
         cin >> userChoice;
-        cin.ignore();
         cout << endl;
 
         // data validation for negative, 0, or greater than 6
         if (userChoice <= 0 || userChoice > 6)
         {
             cout << "Invalid Input" << endl;
-        }
-        else
-        {
             continue;
         }
 
         switch(userChoice) 
         {
-            case 1:
+            case 1: {
                 // add villager
 
                 cout << "Villager name: ";
@@ -68,6 +64,7 @@ int main() {
                 cout << villagerName << " added." << endl;
 
                 break;
+            }
 
             case 2: {
                 // delete villager
@@ -88,7 +85,7 @@ int main() {
                 break;
             }
 
-            case 3:
+            case 3: {
                 // increase friendship
                 cout << "Which villager would you like to increase friendship?: ";
                 getline(cin, villagerName);
@@ -107,8 +104,9 @@ int main() {
                 }
 
                 break;
+            }
 
-            case 4:
+            case 4: {
                 // decrease friendship
                 cout << "Which villager would you like to decrease friendship?: ";
                 getline(cin, villagerName);
@@ -134,8 +132,9 @@ int main() {
                 }
 
                 break;
+            }
 
-            case 5:
+            case 5: {
                 // search for villager
                 cout << "Which villager would you like to search for?: ";
                 getline(cin, villagerName);
@@ -153,13 +152,16 @@ int main() {
                 }
 
                 break;
+            }
 
-            case 6:
+            case 6: {
                 // exit
                 break;
+            }
 
-            default:
+            default: {
                 break;
+            }
         }
             
         // display contents of villager data
