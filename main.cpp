@@ -79,20 +79,67 @@ int main() {
                 cin.ignore();
                 cout << endl;
 
+                // check if that villager is present in the container
                 if(villagerData.erase(villagerName))
                 {
                     cout << villagerName << " deleted." << endl;
                 }
-
-
+                else
+                {
+                    cout << "Villager not found." << endl;
+                }
 
                 break;
+
             case 3:
                 // increase friendship
+                cout << "Which villager would you like to increase friendship?: ";
+                getline(cin, villagerName);
+                cin.ignore();
+                cout << endl;
+
+                // check if that villager is present in the container
+                auto it = villagerData.find(villagerName);
+                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                {
+                    get<0>(it->second)++;
+                    cout << villagerName << " friendship increased." << endl;
+                }
+                else
+                {
+                    cout << "Villager not found." << endl;
+                }
 
                 break;
+
             case 4:
                 // decrease friendship
+                cout << "Which villager would you like to decrease friendship?: ";
+                getline(cin, villagerName);
+                cin.ignore();
+                cout << endl;
+
+                // check if that villager is present in the container
+                auto it = villagerData.find(villagerName);
+                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                {
+                    if(get<0>(it->second) > 0)
+                    {
+                        get<0>(it->second)--;
+                        cout << villagerName << " friendship decreased." << endl;
+                    }
+                    else
+                    {
+                        cout << "Friendship level cannot be negative." << endl;
+                        break;
+                    }
+                }
+                else
+                {
+                    cout << "Villager not found." << endl;
+                }
+
+                break;
 
                 break;
             case 5:
@@ -116,11 +163,7 @@ int main() {
 
     } while (userChoice <= 0 && userChoice > 6);
 
-    // insert elements into the map
-    // note how the right-hand side of the assignment are the vector elements
-    villagerColors["Audie"] = {"Orange", "Yellow", "Red"};
-    villagerColors["Raymond"] = {"Black", "Gray", "White"};
-    villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
+
 
     // access the map using a range-based for loop
     cout << "Villagers and their favorite colors (range-based for loop):" << endl;
