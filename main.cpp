@@ -123,15 +123,14 @@ int main() {
                 auto it = villagerData.find(villagerName);
                 if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
-                    if(get<0>(it->second) > 0)
+                    if(get<0>(it->second) > 0)    // if the friendship level is greater than 0, its safe to decrement (keeping it non-negative)
                     {
                         get<0>(it->second)--;
                         cout << villagerName << " friendship decreased." << endl;
                     }
                     else
                     {
-                        cout << "Friendship level cannot be negative." << endl;
-                        break;
+                        cout << "Friendship level cannot be less than 0." << endl;
                     }
                 }
                 else
@@ -141,15 +140,19 @@ int main() {
 
                 break;
 
-                break;
             case 5:
                 // search for villager
+                cout << "Which villager would you like to decrease friendship?: ";
+                getline(cin, villagerName);
+                cin.ignore();
+                cout << endl;
 
                 break;
+
             case 6:
                 // exit
-
                 break;
+                
             default:
                 break;
         }
