@@ -7,16 +7,17 @@
 #include <tuple>
 using namespace std;
 
-using VillagerData = tuple<int, string, string>;
+using villagerInfo = tuple<int, string, string>;
 
 int main() {
     // declarations
-    map<string, vector<string>> villagerColors;
+    map<string, villagerInfo> villagerData;
     int userChoice;
 
     // displays menu and returns user choice
     do
     {
+        // menu
         cout << "1. Add Villager" << endl;
         cout << "2. Delete Villager" << endl;
         cout << "3. Increase Friendship" << endl;
@@ -28,10 +29,42 @@ int main() {
 
         cout << endl;
 
+        // data validation for negative, 0, or greater than 6
         if (userChoice <= 0 && userChoice > 6)
         {
             cout << "Invalid Input" << endl;
         }
+
+        switch(userChoice)
+        {
+            case 1:
+            // add villager
+            int friendshipLevel;
+            string species;
+            string catchphrase;
+            cout << "Villager name: ";
+            getline (cin, name);
+
+            case 2:
+            // delete villager
+            case 3:
+            // increase friendship
+            case 4:
+            // decrease friendship
+            case 5:
+            // search for villager
+            case 6:
+            // exit
+            default:
+                break;
+        }
+
+
+        // display contents of villager data
+        
+
+
+
 
     } while (userChoice <= 0 && userChoice > 6);
 
