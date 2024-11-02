@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <map>
-#include <vector>
 #include <tuple>
+#include <string>
 using namespace std;
 
 using villagerInfo = tuple<int, string, string>;
@@ -12,8 +12,8 @@ using villagerInfo = tuple<int, string, string>;
 int main() {
     // declarations
     map<string, villagerInfo> villagerData;
-    int userChoice;
-    string villagerName;
+    int userChoice, friendshipLevel;
+    string villagerName, species, catchphrase;
 
     // displays menu and returns user choice
     do
@@ -28,23 +28,22 @@ int main() {
         cout << "User Selection: ";
         cin >> userChoice;
         cin.ignore();
-
         cout << endl;
 
         // data validation for negative, 0, or greater than 6
         if (userChoice <= 0 || userChoice > 6)
         {
             cout << "Invalid Input" << endl;
+        }
+        else
+        {
             continue;
         }
 
-        switch (userChoice)
+        switch(userChoice) 
         {
             case 1:
                 // add villager
-                int friendshipLevel;
-                string species;
-                string catchphrase;
 
                 cout << "Villager name: ";
                 getline(cin, villagerName);
@@ -70,7 +69,7 @@ int main() {
 
                 break;
 
-            case 2:
+            case 2: {
                 // delete villager
                 cout << "Which villager would you like to delete?: ";
                 getline(cin, villagerName);
@@ -87,6 +86,7 @@ int main() {
                 }
 
                 break;
+            }
 
             case 3:
                 // increase friendship
@@ -95,10 +95,10 @@ int main() {
                 cout << endl;
 
                 // check if that villager is present in the container
-                auto it = villagerData.find(villagerName);
-                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                auto itIncrease = villagerData.find(villagerName);
+                if(itIncrease != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
-                    get<0>(it->second)++;
+                    get<0>(itIncrease->second)++;
                     cout << villagerName << "'s friendship increased." << endl;
                 }
                 else
@@ -115,12 +115,12 @@ int main() {
                 cout << endl;
 
                 // check if that villager is present in the container
-                auto it = villagerData.find(villagerName);
-                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                auto itDecrease = villagerData.find(villagerName);
+                if(itDecrease != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
-                    if(get<0>(it->second) > 0)    // if the friendship level is greater than 0, its safe to decrement (keeping it non-negative)
+                    if(get<0>(itDecrease->second) > 0)    // if the friendship level is greater than 0, its safe to decrement (keeping it non-negative)
                     {
-                        get<0>(it->second)--;
+                        get<0>(itDecrease->second)--;
                         cout << villagerName << "'s friendship decreased." << endl;
                     }
                     else
@@ -142,8 +142,8 @@ int main() {
                 cout << endl;
                 
                 // search for the villager
-                auto it = villagerData.find(villagerName);
-                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                auto itSearch = villagerData.find(villagerName);
+                if(itSearch != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
                     cout << "Villager found!" << endl;
                 }
@@ -161,8 +161,7 @@ int main() {
             default:
                 break;
         }
-
-
+            
         // display contents of villager data
         cout << "Villager Details:" << endl;
         
