@@ -38,16 +38,16 @@ int main() {
             continue;
         }
 
-        switch(userChoice)
+        switch (userChoice)
         {
             case 1:
                 // add villager
                 int friendshipLevel;
                 string species;
                 string catchphrase;
+
                 cout << "Villager name: ";
                 getline(cin, villagerName);
-                cin.ignore();
                 cout << endl;
 
                 cout << "Friendship Level: ";
@@ -57,12 +57,10 @@ int main() {
 
                 cout << "Species: ";
                 getline(cin, species);
-                cin.ignore();
                 cout << endl;
 
                 cout << "Catchphrase: ";
                 getline(cin, catchphrase);
-                cin.ignore();
                 cout << endl;
 
                 // create a tuple with the user's inputted information
@@ -76,7 +74,6 @@ int main() {
                 // delete villager
                 cout << "Which villager would you like to delete?: ";
                 getline(cin, villagerName);
-                cin.ignore();
                 cout << endl;
 
                 // check if that villager is present in the container
@@ -95,7 +92,6 @@ int main() {
                 // increase friendship
                 cout << "Which villager would you like to increase friendship?: ";
                 getline(cin, villagerName);
-                cin.ignore();
                 cout << endl;
 
                 // check if that villager is present in the container
@@ -103,7 +99,7 @@ int main() {
                 if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
                     get<0>(it->second)++;
-                    cout << villagerName << " friendship increased." << endl;
+                    cout << villagerName << "'s friendship increased." << endl;
                 }
                 else
                 {
@@ -116,7 +112,6 @@ int main() {
                 // decrease friendship
                 cout << "Which villager would you like to decrease friendship?: ";
                 getline(cin, villagerName);
-                cin.ignore();
                 cout << endl;
 
                 // check if that villager is present in the container
@@ -126,7 +121,7 @@ int main() {
                     if(get<0>(it->second) > 0)    // if the friendship level is greater than 0, its safe to decrement (keeping it non-negative)
                     {
                         get<0>(it->second)--;
-                        cout << villagerName << " friendship decreased." << endl;
+                        cout << villagerName << "'s friendship decreased." << endl;
                     }
                     else
                     {
@@ -142,71 +137,45 @@ int main() {
 
             case 5:
                 // search for villager
-                cout << "Which villager would you like to decrease friendship?: ";
+                cout << "Which villager would you like to search for?: ";
                 getline(cin, villagerName);
-                cin.ignore();
                 cout << endl;
+                
+                // search for the villager
+                auto it = villagerData.find(villagerName);
+                if(it != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
+                {
+                    cout << "Villager found!" << endl;
+                }
+                else
+                {
+                    cout << "Villager not found." << endl;
+                }
 
                 break;
 
             case 6:
                 // exit
                 break;
-                
+
             default:
                 break;
         }
 
 
         // display contents of villager data
+        cout << "Villager Details:" << endl;
         
+        for (const auto& data : villagerData)
+        {
+            const string& villagerName = data.first;   // gets the name from the map
+            const villagerInfo& info = data.second;    // gets the tuple from the map
 
-
-
-
-    } while (userChoice <= 0 && userChoice > 6);
-
-
-
-    // access the map using a range-based for loop
-    cout << "Villagers and their favorite colors (range-based for loop):" << endl;
-    for (auto pair : villagerColors) {
-        cout << pair.first << ": ";
-        for (auto color : pair.second)
-            cout << color << " ";
-        cout << endl;
-    }
-
-    // access the map using iterators
-    cout << "\nVillagers and their favorite colors (iterators):" << endl;
-    for (map<string, vector<string>>::iterator it = villagerColors.begin(); 
-                                               it != villagerColors.end(); ++it) {
-        cout << it->first << ": ";
-        for (auto color : it->second) {
-            cout << color << " ";
+            cout << villagerName << " [" << get<0>(info) << ", " << get<1>(info) << ", " << get<2>(info) << "]" << endl;
         }
-        cout << endl;
-    }
+        cout << endl;        
 
-    // delete an element
-    villagerColors.erase("Raymond");
-
-    // search for an element using .find() to avoid errors
-    string searchKey = "Audie";
-    auto it = villagerColors.find(searchKey);
-    if (it != villagerColors.end()) {  // the iterator points to beyond the end of the map
-                                       // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s favorite colors: ";
-        for (auto color : it->second)  // range loop to traverse the value/vector
-            cout << color << " ";
-        cout << endl;
-    } else
-        cout << endl << searchKey << " not found." << endl;
-
-    // report size, clear, report size again to confirm map operations
-    cout << "\nSize before clear: " << villagerColors.size() << endl;
-    villagerColors.clear();
-    cout << "Size after clear: " << villagerColors.size() << endl;
+    } while (userChoice != 6);
 
     return 0;
 }
