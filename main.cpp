@@ -27,6 +27,7 @@ int main() {
         cout << "6. Exit" << endl;
         cout << "User Selection: ";
         cin >> userChoice;
+        cin.ignore();
         cout << endl;
 
         // data validation for negative, 0, or greater than 6
@@ -40,28 +41,23 @@ int main() {
         {
             case 1: {
                 // add villager
-
                 cout << "Villager name: ";
                 getline(cin, villagerName);
-                cout << endl;
 
                 cout << "Friendship Level: ";
                 cin >> friendshipLevel;
                 cin.ignore();
-                cout << endl;
 
                 cout << "Species: ";
                 getline(cin, species);
-                cout << endl;
 
                 cout << "Catchphrase: ";
                 getline(cin, catchphrase);
-                cout << endl;
 
                 // create a tuple with the user's inputted information
                 villagerData[villagerName] = make_tuple(friendshipLevel, species, catchphrase);
 
-                cout << villagerName << " added." << endl;
+                cout << villagerName << " added." << endl << endl;
 
                 break;
             }
@@ -75,11 +71,11 @@ int main() {
                 // check if that villager is present in the container
                 if(villagerData.erase(villagerName))
                 {
-                    cout << villagerName << " deleted." << endl;
+                    cout << villagerName << " deleted." << endl << endl;
                 }
                 else
                 {
-                    cout << "Villager not found." << endl;
+                    cout << "Villager not found." << endl << endl;
                 }
 
                 break;
@@ -96,11 +92,11 @@ int main() {
                 if(itIncrease != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
                     get<0>(itIncrease->second)++;
-                    cout << villagerName << "'s friendship increased." << endl;
+                    cout << villagerName << "'s friendship increased." << endl << endl;
                 }
                 else
                 {
-                    cout << "Villager not found." << endl;
+                    cout << "Villager not found." << endl << endl;
                 }
 
                 break;
@@ -119,16 +115,16 @@ int main() {
                     if(get<0>(itDecrease->second) > 0)    // if the friendship level is greater than 0, its safe to decrement (keeping it non-negative)
                     {
                         get<0>(itDecrease->second)--;
-                        cout << villagerName << "'s friendship decreased." << endl;
+                        cout << villagerName << "'s friendship decreased." << endl << endl;
                     }
                     else
                     {
-                        cout << "Friendship level cannot be less than 0." << endl;
+                        cout << "Friendship level cannot be less than 0." << endl << endl;
                     }
                 }
                 else
                 {
-                    cout << "Villager not found." << endl;
+                    cout << "Villager not found." << endl << endl;
                 }
 
                 break;
@@ -144,11 +140,11 @@ int main() {
                 auto itSearch = villagerData.find(villagerName);
                 if(itSearch != villagerData.end())      // if the iterator does NOT reach the end of the container, then a match must be found
                 {
-                    cout << "Villager found!" << endl;
+                    cout << "Villager found!" << endl << endl;
                 }
                 else
                 {
-                    cout << "Villager not found." << endl;
+                    cout << "Villager not found." << endl << endl;
                 }
 
                 break;
